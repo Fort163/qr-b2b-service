@@ -1,7 +1,9 @@
 package com.quick.recording.qrb2bservice.controller;
 
 import com.google.common.base.Strings;
+import com.quick.recording.gateway.dto.auth.AuthUserDto;
 import com.quick.recording.gateway.dto.company.CompanyDto;
+import com.quick.recording.gateway.service.auth.AuthServiceUserApi;
 import com.quick.recording.gateway.service.company.CompanyController;
 import com.quick.recording.resource.service.anatation.CurrentUser;
 import com.quick.recording.resource.service.security.QROAuth2AuthenticatedPrincipal;
@@ -17,7 +19,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final CompanyController companyController;
+    private final AuthServiceUserApi authServiceUserApi;
 
     private Map<String,String> mapEmail = new HashMap<>();
     private Map<String,String> mapPhone = new HashMap<>();
@@ -56,48 +58,10 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/test/company")
+    @PatchMapping("/change")
     @PreAuthorize("hasAnyAuthority('ROLE_CHANGE_ME_INFO')")
-    public ResponseEntity<List<CompanyDto>> testCompany(@CurrentUser QROAuth2AuthenticatedPrincipal user){
-        ResponseEntity<List<CompanyDto>> companyList = companyController.getCompanyList();
-        return companyList;
-    }
-
-    @GetMapping("/test/combo1")
-    @PreAuthorize("hasAnyAuthority('ROLE_CHANGE_ME_INFO')")
-    public ResponseEntity<List<CompanyDto>> testCombo1(@CurrentUser QROAuth2AuthenticatedPrincipal user,@RequestParam(required = false) String name){
-        CompanyDto companyDto1 = new CompanyDto();
-        companyDto1.setName("Рога копыта");
-        companyDto1.setUuid(UUID.randomUUID());
-        CompanyDto companyDto2 = new CompanyDto();
-        companyDto2.setName("ОТР 2000");
-        companyDto2.setUuid(UUID.randomUUID());
-        CompanyDto companyDto3 = new CompanyDto();
-        companyDto3.setName("Хорошая");
-        companyDto3.setUuid(UUID.randomUUID());
-        CompanyDto companyDto4 = new CompanyDto();
-        companyDto4.setName("Самая важная и самая красивая на свете компания мечты");
-        companyDto4.setUuid(UUID.randomUUID());
-        CompanyDto companyDto5 = new CompanyDto();
-        companyDto5.setName("Техстрой");
-        companyDto5.setUuid(UUID.randomUUID());
-        CompanyDto companyDto6 = new CompanyDto();
-        companyDto6.setName("Про IT");
-        companyDto6.setUuid(UUID.randomUUID());
-        List<CompanyDto> companyDtoList = List.of(companyDto1, companyDto2, companyDto3, companyDto4, companyDto5, companyDto6);
-        if(Objects.nonNull(name) && !name.isEmpty()) {
-            return ResponseEntity.ok(companyDtoList.stream().filter(item -> item.getName().toLowerCase().contains(name.toLowerCase())).toList());
-        }
-        else {
-            return ResponseEntity.ok(companyDtoList);
-        }
-    }
-
-    @PostMapping("/test/combo2")
-    @PreAuthorize("hasAnyAuthority('ROLE_CHANGE_ME_INFO')")
-    public ResponseEntity<List<CompanyDto>> testCombo2(@CurrentUser QROAuth2AuthenticatedPrincipal user, @RequestBody Map<String,Object> map){
-        ResponseEntity<List<CompanyDto>> companyList = companyController.getCompanyList();
-        return companyList;
+    public ResponseEntity<AuthUserDto> change(@RequestBody AuthUserDto userDto){
+        return authServiceUserApi.patch(userDto);
     }
 
 }
