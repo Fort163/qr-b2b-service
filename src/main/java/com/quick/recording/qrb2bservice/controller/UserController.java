@@ -1,10 +1,9 @@
 package com.quick.recording.qrb2bservice.controller;
 
-import com.google.common.base.Strings;
 import com.quick.recording.gateway.dto.auth.AuthUserDto;
-import com.quick.recording.gateway.dto.company.CompanyDto;
+import com.quick.recording.gateway.dto.auth.Role2UserDto;
 import com.quick.recording.gateway.service.auth.AuthServiceUserApi;
-import com.quick.recording.gateway.service.company.CompanyController;
+import com.quick.recording.qrb2bservice.config.ServerAuth;
 import com.quick.recording.resource.service.anatation.CurrentUser;
 import com.quick.recording.resource.service.security.QROAuth2AuthenticatedPrincipal;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -25,8 +26,11 @@ public class UserController {
     private Map<String,String> mapPhone = new HashMap<>();
 
     @GetMapping("/test")
-    @PreAuthorize("hasAnyAuthority('ROLE_CHANGE_ME_INFO')")
-    public ResponseEntity<String> test(){
+    public ResponseEntity<String> test(@CurrentUser QROAuth2AuthenticatedPrincipal user){
+        Role2UserDto dto = new Role2UserDto();
+        dto.setUser(user.getUuid());
+        dto.setRole(UUID.fromString("bff8779f-ecf6-4dcf-98d2-17b2984a0934"));
+        authServiceUserApi.addRole(dto);
         return ResponseEntity.ok("ок");
     }
 
