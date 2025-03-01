@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/session")
+@RequestMapping("/api/v1/session")
 @RequiredArgsConstructor
 public class SessionController {
 

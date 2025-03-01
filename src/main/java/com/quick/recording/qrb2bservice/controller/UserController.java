@@ -3,7 +3,6 @@ package com.quick.recording.qrb2bservice.controller;
 import com.quick.recording.gateway.dto.auth.AuthUserDto;
 import com.quick.recording.gateway.dto.auth.Role2UserDto;
 import com.quick.recording.gateway.service.auth.AuthServiceUserApi;
-import com.quick.recording.qrb2bservice.config.ServerAuth;
 import com.quick.recording.resource.service.anatation.CurrentUser;
 import com.quick.recording.resource.service.security.QROAuth2AuthenticatedPrincipal;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
 
