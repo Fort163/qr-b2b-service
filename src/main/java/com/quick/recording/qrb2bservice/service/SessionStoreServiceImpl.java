@@ -3,6 +3,7 @@ package com.quick.recording.qrb2bservice.service;
 import com.quick.recording.gateway.config.error.exeption.NotFoundException;
 import com.quick.recording.qrb2bservice.entity.SessionStoreEntity;
 import com.quick.recording.qrb2bservice.repository.SessionStoreRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,13 @@ public class SessionStoreServiceImpl implements SessionStoreService {
     private final SessionStoreRepository sessionStoreRepository;
 
     @Override
+    @CircuitBreaker(name = "database")
     public String getByUuid(UUID uuid) {
         return sessionStoreRepository.findById(uuid).orElseThrow(() -> new NotFoundException(SessionStoreEntity.class, uuid)).getStore();
     }
 
     @Override
+    @CircuitBreaker(name = "database")
     public boolean save(UUID uuid, String store) {
         try {
             Optional<SessionStoreEntity> byId = sessionStoreRepository.findById(uuid);
