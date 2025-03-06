@@ -1,5 +1,6 @@
 package com.quick.recording.qrb2bservice.service;
 
+import com.quick.recording.gateway.config.MessageUtil;
 import com.quick.recording.gateway.config.error.exeption.NotFoundException;
 import com.quick.recording.qrb2bservice.entity.SessionStoreEntity;
 import com.quick.recording.qrb2bservice.repository.SessionStoreRepository;
@@ -15,11 +16,14 @@ import java.util.UUID;
 public class SessionStoreServiceImpl implements SessionStoreService {
 
     private final SessionStoreRepository sessionStoreRepository;
+    private final MessageUtil messageUtil;
 
     @Override
     @CircuitBreaker(name = "database")
     public String getByUuid(UUID uuid) {
-        return sessionStoreRepository.findById(uuid).orElseThrow(() -> new NotFoundException(SessionStoreEntity.class, uuid)).getStore();
+        return sessionStoreRepository.findById(uuid).orElseThrow(
+                () -> new NotFoundException(messageUtil, SessionStoreEntity.class, uuid)
+        ).getStore();
     }
 
     @Override
