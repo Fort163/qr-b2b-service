@@ -1,4 +1,5 @@
-CREATE TABLE session_store (
-                           uuid uuid primary key,
-                           store jsonb
+CREATE TABLE session_store
+(
+    uuid  uuid primary key,
+    store jsonb
 );

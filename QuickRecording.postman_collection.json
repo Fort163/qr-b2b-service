@@ -1,699 +1,699 @@
 {
-	"info": {
-		"_postman_id": "318f29d7-f255-4edb-bf55-121c23bd6727",
-		"name": "QuickRecording",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15893943",
-		"_collection_link": "https://martian-zodiac-716691.postman.co/workspace/8e178111-5d03-47cb-b154-45ec8f774095/collection/15893943-318f29d7-f255-4edb-bf55-121c23bd6727?action=share&source=collection_link&creator=15893943"
-	},
-	"item": [
-		{
-			"name": "AuthService",
-			"item": [
-				{
-					"name": "Actuator",
-					"item": [
-						{
-							"name": "Actuator",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{auth_url}}actuator",
-									"host": [
-										"{{auth_url}}actuator"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Health",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{auth_url}}actuator/health",
-									"host": [
-										"{{auth_url}}actuator"
-									],
-									"path": [
-										"health"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Info",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{auth_url}}actuator/info",
-									"host": [
-										"{{auth_url}}actuator"
-									],
-									"path": [
-										"info"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Env",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{auth_url}}actuator/env",
-									"host": [
-										"{{auth_url}}actuator"
-									],
-									"path": [
-										"env"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Liquibase",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{auth_url}}actuator/liquibase",
-									"host": [
-										"{{auth_url}}actuator"
-									],
-									"path": [
-										"liquibase"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Refresh",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{auth_url}}actuator/refresh",
-									"host": [
-										"{{auth_url}}actuator"
-									],
-									"path": [
-										"refresh"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Login",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.globals.set(\"qrToken\", pm.response.json().access_token);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "test-client",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "test-client",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{auth_url}}oauth2/token?grant_type=client_credentials",
-							"host": [
-								"{{auth_url}}oauth2"
-							],
-							"path": [
-								"token"
-							],
-							"query": [
-								{
-									"key": "grant_type",
-									"value": "client_credentials"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "CompanyService",
-			"item": [
-				{
-					"name": "Activity",
-					"item": [
-						{
-							"name": "List",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{company_url}}{{company_activity_url}}?size=2&page=2",
-									"host": [
-										"{{company_url}}{{company_activity_url}}"
-									],
-									"query": [
-										{
-											"key": "size",
-											"value": "2"
-										},
-										{
-											"key": "page",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Actuator",
-					"item": [
-						{
-							"name": "Actuator",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{company_url}}actuator",
-									"host": [
-										"{{company_url}}actuator"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Health",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{company_url}}actuator/health",
-									"host": [
-										"{{company_url}}actuator"
-									],
-									"path": [
-										"health"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Info",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{company_url}}actuator/info",
-									"host": [
-										"{{company_url}}actuator"
-									],
-									"path": [
-										"info"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Env",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{company_url}}actuator/env",
-									"host": [
-										"{{company_url}}actuator"
-									],
-									"path": [
-										"env"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Liquibase",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{company_url}}actuator/liquibase",
-									"host": [
-										"{{company_url}}actuator"
-									],
-									"path": [
-										"liquibase"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Refresh",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{company_url}}actuator/refresh",
-									"host": [
-										"{{company_url}}actuator"
-									],
-									"path": [
-										"refresh"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "QRB2B",
-			"item": [
-				{
-					"name": "Company",
-					"item": [
-						{
-							"name": "Activity",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{qrb2b_url}}{{qrb2b_company_url}}/activity",
-									"host": [
-										"{{qrb2b_url}}{{qrb2b_company_url}}"
-									],
-									"path": [
-										"activity"
-									],
-									"query": [
-										{
-											"key": "name",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "description",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "isActive",
-											"value": "false",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Session",
-					"item": []
-				},
-				{
-					"name": "User",
-					"item": []
-				}
-			]
-		},
-		{
-			"name": "SettingService",
-			"item": [
-				{
-					"name": "Actuator",
-					"item": [
-						{
-							"name": "Actuator",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}actuator",
-									"host": [
-										"{{setting_url}}actuator"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Health",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}actuator/health",
-									"host": [
-										"{{setting_url}}actuator"
-									],
-									"path": [
-										"health"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Info",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}actuator/info",
-									"host": [
-										"{{setting_url}}actuator"
-									],
-									"path": [
-										"info"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Env",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}actuator/env",
-									"host": [
-										"{{setting_url}}actuator"
-									],
-									"path": [
-										"env"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Liquibase",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}actuator/liquibase",
-									"host": [
-										"{{setting_url}}actuator"
-									],
-									"path": [
-										"liquibase"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Refresh",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{qrToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}actuator/refresh",
-									"host": [
-										"{{setting_url}}actuator"
-									],
-									"path": [
-										"refresh"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Encrypt",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "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",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{setting_url}}encrypt",
-							"host": [
-								"{{setting_url}}encrypt"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Decrypt",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "114c81cc3f2faaa18afaacfa5d9be69ddc92e5f129864fd9f8fd937bcd01030e",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{setting_url}}decrypt",
-							"host": [
-								"{{setting_url}}decrypt"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Settings",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{setting_url}}company-service/local",
-							"host": [
-								"{{setting_url}}company-service"
-							],
-							"path": [
-								"local"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Company",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}company-service/local",
-									"host": [
-										"{{setting_url}}company-service"
-									],
-									"path": [
-										"local"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "PartTime",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}part-time-service/local",
-									"host": [
-										"{{setting_url}}part-time-service"
-									],
-									"path": [
-										"local"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "Auth",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{setting_url}}auth-service/local",
-									"host": [
-										"{{setting_url}}auth-service"
-									],
-									"path": [
-										"local"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						}
-					]
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "318f29d7-f255-4edb-bf55-121c23bd6727",
+    "name": "QuickRecording",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "15893943",
+    "_collection_link": "https://martian-zodiac-716691.postman.co/workspace/8e178111-5d03-47cb-b154-45ec8f774095/collection/15893943-318f29d7-f255-4edb-bf55-121c23bd6727?action=share&source=collection_link&creator=15893943"
+  },
+  "item": [
+    {
+      "name": "AuthService",
+      "item": [
+        {
+          "name": "Actuator",
+          "item": [
+            {
+              "name": "Actuator",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{auth_url}}actuator",
+                  "host": [
+                    "{{auth_url}}actuator"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Health",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{auth_url}}actuator/health",
+                  "host": [
+                    "{{auth_url}}actuator"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Info",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{auth_url}}actuator/info",
+                  "host": [
+                    "{{auth_url}}actuator"
+                  ],
+                  "path": [
+                    "info"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Env",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{auth_url}}actuator/env",
+                  "host": [
+                    "{{auth_url}}actuator"
+                  ],
+                  "path": [
+                    "env"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Liquibase",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{auth_url}}actuator/liquibase",
+                  "host": [
+                    "{{auth_url}}actuator"
+                  ],
+                  "path": [
+                    "liquibase"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Refresh",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{auth_url}}actuator/refresh",
+                  "host": [
+                    "{{auth_url}}actuator"
+                  ],
+                  "path": [
+                    "refresh"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.globals.set(\"qrToken\", pm.response.json().access_token);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "test-client",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "test-client",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{auth_url}}oauth2/token?grant_type=client_credentials",
+              "host": [
+                "{{auth_url}}oauth2"
+              ],
+              "path": [
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CompanyService",
+      "item": [
+        {
+          "name": "Activity",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{company_url}}{{company_activity_url}}?size=2&page=2",
+                  "host": [
+                    "{{company_url}}{{company_activity_url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "2"
+                    },
+                    {
+                      "key": "page",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Actuator",
+          "item": [
+            {
+              "name": "Actuator",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{company_url}}actuator",
+                  "host": [
+                    "{{company_url}}actuator"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Health",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{company_url}}actuator/health",
+                  "host": [
+                    "{{company_url}}actuator"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Info",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{company_url}}actuator/info",
+                  "host": [
+                    "{{company_url}}actuator"
+                  ],
+                  "path": [
+                    "info"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Env",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{company_url}}actuator/env",
+                  "host": [
+                    "{{company_url}}actuator"
+                  ],
+                  "path": [
+                    "env"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Liquibase",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{company_url}}actuator/liquibase",
+                  "host": [
+                    "{{company_url}}actuator"
+                  ],
+                  "path": [
+                    "liquibase"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Refresh",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{company_url}}actuator/refresh",
+                  "host": [
+                    "{{company_url}}actuator"
+                  ],
+                  "path": [
+                    "refresh"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "QRB2B",
+      "item": [
+        {
+          "name": "Company",
+          "item": [
+            {
+              "name": "Activity",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{qrb2b_url}}{{qrb2b_company_url}}/activity",
+                  "host": [
+                    "{{qrb2b_url}}{{qrb2b_company_url}}"
+                  ],
+                  "path": [
+                    "activity"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "description",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "isActive",
+                      "value": "false",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Session",
+          "item": []
+        },
+        {
+          "name": "User",
+          "item": []
+        }
+      ]
+    },
+    {
+      "name": "SettingService",
+      "item": [
+        {
+          "name": "Actuator",
+          "item": [
+            {
+              "name": "Actuator",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}actuator",
+                  "host": [
+                    "{{setting_url}}actuator"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Health",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}actuator/health",
+                  "host": [
+                    "{{setting_url}}actuator"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Info",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}actuator/info",
+                  "host": [
+                    "{{setting_url}}actuator"
+                  ],
+                  "path": [
+                    "info"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Env",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}actuator/env",
+                  "host": [
+                    "{{setting_url}}actuator"
+                  ],
+                  "path": [
+                    "env"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Liquibase",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}actuator/liquibase",
+                  "host": [
+                    "{{setting_url}}actuator"
+                  ],
+                  "path": [
+                    "liquibase"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Refresh",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{qrToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}actuator/refresh",
+                  "host": [
+                    "{{setting_url}}actuator"
+                  ],
+                  "path": [
+                    "refresh"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Encrypt",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "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",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{setting_url}}encrypt",
+              "host": [
+                "{{setting_url}}encrypt"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Decrypt",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "114c81cc3f2faaa18afaacfa5d9be69ddc92e5f129864fd9f8fd937bcd01030e",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{setting_url}}decrypt",
+              "host": [
+                "{{setting_url}}decrypt"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Settings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{setting_url}}company-service/local",
+              "host": [
+                "{{setting_url}}company-service"
+              ],
+              "path": [
+                "local"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Company",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}company-service/local",
+                  "host": [
+                    "{{setting_url}}company-service"
+                  ],
+                  "path": [
+                    "local"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "PartTime",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}part-time-service/local",
+                  "host": [
+                    "{{setting_url}}part-time-service"
+                  ],
+                  "path": [
+                    "local"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "Auth",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{setting_url}}auth-service/local",
+                  "host": [
+                    "{{setting_url}}auth-service"
+                  ],
+                  "path": [
+                    "local"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

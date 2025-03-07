@@ -21,13 +21,13 @@ public class CompanyController {
 
     @GetMapping("/activity")
     @PreAuthorize("isAuthenticated()")
-    public Page<ActivityDto> search(SearchActivityDto searchActivityDto, Pageable pageable){
-        return companyService.getActivityList(searchActivityDto,pageable);
+    public Page<ActivityDto> search(SearchActivityDto searchActivityDto, Pageable pageable) {
+        return companyService.getActivityList(searchActivityDto, pageable);
     }
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<CompanyDto> post(@RequestBody CompanyDto dto){
+    public ResponseEntity<CompanyDto> post(@RequestBody CompanyDto dto) {
         return companyService.createCompany(dto);
     }
 

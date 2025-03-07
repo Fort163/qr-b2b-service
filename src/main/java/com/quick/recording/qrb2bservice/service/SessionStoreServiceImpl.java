@@ -31,16 +31,14 @@ public class SessionStoreServiceImpl implements SessionStoreService {
     public boolean save(UUID uuid, String store) {
         try {
             Optional<SessionStoreEntity> byId = sessionStoreRepository.findById(uuid);
-            if(byId.isPresent()){
+            if (byId.isPresent()) {
                 SessionStoreEntity sessionStoreEntity = byId.get();
                 sessionStoreEntity.setStore(store);
                 sessionStoreRepository.save(sessionStoreEntity);
-            }
-            else {
+            } else {
                 sessionStoreRepository.save(new SessionStoreEntity(uuid, store));
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

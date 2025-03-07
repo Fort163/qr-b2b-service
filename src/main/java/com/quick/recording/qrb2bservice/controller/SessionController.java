@@ -17,15 +17,15 @@ public class SessionController {
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('ROLE_READ')")
-    public ResponseEntity<String> session(@CurrentUser QROAuth2AuthenticatedPrincipal user){
+    public ResponseEntity<String> session(@CurrentUser QROAuth2AuthenticatedPrincipal user) {
         String session = sessionStoreService.getByUuid(user.getUuid());
         return ResponseEntity.ok(session);
     }
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ROLE_READ')")
-    public ResponseEntity<Boolean> session(@CurrentUser QROAuth2AuthenticatedPrincipal user, @RequestBody String store){
-        return ResponseEntity.ok(this.sessionStoreService.save(user.getUuid(),store));
+    public ResponseEntity<Boolean> session(@CurrentUser QROAuth2AuthenticatedPrincipal user, @RequestBody String store) {
+        return ResponseEntity.ok(this.sessionStoreService.save(user.getUuid(), store));
     }
 
 }

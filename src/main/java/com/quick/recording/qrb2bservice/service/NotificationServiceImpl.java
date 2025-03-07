@@ -9,13 +9,13 @@ import java.util.Map;
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
-    private Map<String,String> mapEmail = new HashMap<>();
-    private Map<String,String> mapPhone = new HashMap<>();
+    private Map<String, String> mapEmail = new HashMap<>();
+    private Map<String, String> mapPhone = new HashMap<>();
 
     @Override
     @CircuitBreaker(name = "notificationService")
     public Boolean sendCodeEmail(String email) {
-        mapEmail.put(email,"9999");
+        mapEmail.put(email, "9999");
         return true;
     }
 
@@ -28,7 +28,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @CircuitBreaker(name = "notificationService")
     public Boolean sendCodePhone(String phone) {
-        mapPhone.put(phone,"9999");
+        mapPhone.put(phone, "9999");
         return true;
     }
 
