@@ -16,7 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <postgres.version>42.2.19</postgres.version>
-        <gateway.version>0.0.1-SNAPSHOT</gateway.version>
+        <qr.gateway.version>0.0.1-SNAPSHOT</qr.gateway.version>
     </properties>
     <dependencies>
         <dependency>
@@ -30,8 +30,8 @@
         </dependency>
         <dependency>
             <groupId>com.quick.recording</groupId>
-            <artifactId>gateway</artifactId>
-            <version>${gateway.version}</version>
+            <artifactId>qr-gateway</artifactId>
+            <version>${qr.gateway.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
