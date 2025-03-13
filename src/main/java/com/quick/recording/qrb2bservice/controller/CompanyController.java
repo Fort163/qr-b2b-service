@@ -2,7 +2,6 @@ package com.quick.recording.qrb2bservice.controller;
 
 import com.quick.recording.gateway.dto.company.ActivityDto;
 import com.quick.recording.gateway.dto.company.CompanyDto;
-import com.quick.recording.gateway.dto.company.SearchActivityDto;
 import com.quick.recording.qrb2bservice.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,8 +20,8 @@ public class CompanyController {
 
     @GetMapping("/activity")
     @PreAuthorize("isAuthenticated()")
-    public Page<ActivityDto> search(SearchActivityDto searchActivityDto, Pageable pageable) {
-        return companyService.getActivityList(searchActivityDto, pageable);
+    public Page<ActivityDto> search(@RequestBody ActivityDto dto, Pageable pageable) {
+        return companyService.getActivityList(dto, pageable);
     }
 
     @PostMapping
