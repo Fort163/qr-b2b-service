@@ -4,6 +4,7 @@ import com.quick.recording.gateway.dto.company.ActivityDto;
 import com.quick.recording.gateway.dto.company.CompanyDto;
 import com.quick.recording.qrb2bservice.service.CompanyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class CompanyController {
 
     @GetMapping("/activity")
     @PreAuthorize("isAuthenticated()")
-    public Page<ActivityDto> search(@RequestBody ActivityDto dto, Pageable pageable) {
+    public Page<ActivityDto> search(@SpringQueryMap ActivityDto dto, Pageable pageable) {
         return companyService.getActivityList(dto, pageable);
     }
 
