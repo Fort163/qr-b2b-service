@@ -4,7 +4,7 @@
 		"name": "QuickRecording",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15893943",
-		"_collection_link": "https://martian-zodiac-716691.postman.co/workspace/8e178111-5d03-47cb-b154-45ec8f774095/collection/15893943-318f29d7-f255-4edb-bf55-121c23bd6727?action=share&source=collection_link&creator=15893943"
+		"_collection_link": "https://martian-zodiac-716691.postman.co/workspace/Home-WorkSpace~8e178111-5d03-47cb-b154-45ec8f774095/collection/15893943-318f29d7-f255-4edb-bf55-121c23bd6727?action=share&source=collection_link&creator=15893943"
 	},
 	"item": [
 		{
@@ -820,7 +820,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"uuid\": \"{{activityUUID}}\"\r\n}",
+									"raw": "{\r\n    \"uuid\": \"{{activityUUID}}\",\r\n    \"name\": \"Шиномонтаж\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1078,6 +1078,23 @@
 									"raw": "{{qrb2b_url}}{{qrb2b_session_url}}",
 									"host": [
 										"{{qrb2b_url}}{{qrb2b_session_url}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{qrb2b_url}}{{qrb2b_session_url}}/test",
+									"host": [
+										"{{qrb2b_url}}{{qrb2b_session_url}}"
+									],
+									"path": [
+										"test"
 									]
 								}
 							},
@@ -1360,7 +1377,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "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",
+							"raw": "password",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1383,7 +1400,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "dc77756b2413a74f0df118349404e601e1c9ba634f5e71e4bc216decc1368464e5bc3013f6f400f260e8e4711487a9996c4de1980a66ab822410c1ee5e2fa47b",
+							"raw": "caae981b1d51d27216a8532918141337887a0dabf56021dfb9c459e52b3c5fcb",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1681,22 +1698,195 @@
 					"item": [
 						{
 							"name": "Activity",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{gateway_url}}company/api/v1/activity",
-									"host": [
-										"{{gateway_url}}company"
+							"item": [
+								{
+									"name": "Search",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway_url}}company/{{company_activity_url}}?name=м&description=м",
+											"host": [
+												"{{gateway_url}}company"
+											],
+											"path": [
+												"{{company_activity_url}}"
+											],
+											"query": [
+												{
+													"key": "size",
+													"value": "3",
+													"disabled": true
+												},
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "sort",
+													"value": "name,desc",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "м"
+												},
+												{
+													"key": "description",
+													"value": "м"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ByUUID",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway_url}}company/{{company_activity_url}}/{{activityUUID}}",
+											"host": [
+												"{{gateway_url}}company"
+											],
+											"path": [
+												"{{company_activity_url}}",
+												"{{activityUUID}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"uuid\": \"{{activityUUID}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway_url}}company/{{company_activity_url}}",
+											"host": [
+												"{{gateway_url}}company"
+											],
+											"path": [
+												"{{company_activity_url}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Patch",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"uuid\": \"{{activityUUID}}\",\r\n    \"name\": \"Шиномонтаж\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway_url}}company/{{company_activity_url}}/patch",
+											"host": [
+												"{{gateway_url}}company"
+											],
+											"path": [
+												"{{company_activity_url}}",
+												"patch"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{gateway_url}}company/{{company_activity_url}}/{{activityUUID}}?delete=HARD",
+											"host": [
+												"{{gateway_url}}company"
+											],
+											"path": [
+												"{{company_activity_url}}",
+												"{{activityUUID}}"
+											],
+											"query": [
+												{
+													"key": "delete",
+													"value": "HARD"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Post",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set(\"activityUUID\", pm.response.json().uuid);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
 									],
-									"path": [
-										"api",
-										"v1",
-										"activity"
-									]
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Тест\",\r\n    \"description\": \"Тест\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway_url}}company/{{company_activity_url}}",
+											"host": [
+												"{{gateway_url}}company"
+											],
+											"path": [
+												"{{company_activity_url}}"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						}
 					]
 				},
@@ -1820,6 +2010,183 @@
 								}
 							},
 							"response": []
+						}
+					]
+				},
+				{
+					"name": "Notification",
+					"item": [
+						{
+							"name": "Message",
+							"item": [
+								{
+									"name": "Search",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway_url}}notification/{{notification_message_url}}",
+											"host": [
+												"{{gateway_url}}notification"
+											],
+											"path": [
+												"{{notification_message_url}}"
+											],
+											"query": [
+												{
+													"key": "size",
+													"value": "3",
+													"disabled": true
+												},
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "sort",
+													"value": "name,desc",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ByUUID",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway_url}}notification/{{notification_message_url}}/{{messageNotificationUUID}}",
+											"host": [
+												"{{gateway_url}}notification"
+											],
+											"path": [
+												"{{notification_message_url}}",
+												"{{messageNotificationUUID}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"uuid\": \"{{messageNotificationUUID}}\",\r\n    \"isActive\": true,\r\n    \"fromUser\": \"test2\",\r\n    \"jsonObject\": null,\r\n    \"path\": \"/home\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway_url}}notification/{{notification_message_url}}",
+											"host": [
+												"{{gateway_url}}notification"
+											],
+											"path": [
+												"{{notification_message_url}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Patch",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"uuid\": \"{{messageNotificationUUID}}\",\r\n    \"received\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway_url}}notification/{{notification_message_url}}/patch",
+											"host": [
+												"{{gateway_url}}notification"
+											],
+											"path": [
+												"{{notification_message_url}}",
+												"patch"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{gateway_url}}notification/{{notification_message_url}}/{{messageNotificationUUID}}?delete=SOFT",
+											"host": [
+												"{{gateway_url}}notification"
+											],
+											"path": [
+												"{{notification_message_url}}",
+												"{{messageNotificationUUID}}"
+											],
+											"query": [
+												{
+													"key": "delete",
+													"value": "SOFT"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Post",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.collectionVariables.set(\"messageNotificationUUID\", pm.response.json().uuid);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fromUser\":\"test\",\r\n    \"toUser\":\"test63\",\r\n    \"sendType\":\"TO_USER\",\r\n    \"messageType\":\"INFO\",\r\n    \"project\":\"QR\",\r\n    \"message\":\"Test message\",\r\n    \"messageCode\":\"notification.message.youAdded\",\r\n    \"path\":\"/home\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway_url}}notification/{{notification_message_url}}",
+											"host": [
+												"{{gateway_url}}notification"
+											],
+											"path": [
+												"{{notification_message_url}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				}
@@ -2420,166 +2787,6 @@
 									],
 									"path": [
 										"refresh"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Message",
-					"item": [
-						{
-							"name": "Search",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{notification_url}}{{notification_message_url}}",
-									"host": [
-										"{{notification_url}}{{notification_message_url}}"
-									],
-									"query": [
-										{
-											"key": "size",
-											"value": "3",
-											"disabled": true
-										},
-										{
-											"key": "page",
-											"value": "1",
-											"disabled": true
-										},
-										{
-											"key": "sort",
-											"value": "name,desc",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ByUUID",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{notification_url}}{{notification_message_url}}/{{messageNotificationUUID}}",
-									"host": [
-										"{{notification_url}}{{notification_message_url}}"
-									],
-									"path": [
-										"{{messageNotificationUUID}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Put",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"uuid\": {{messageNotificationUUID}},\r\n    \"isActive\": true,\r\n    \"fromUser\": \"test2\",\r\n    \"jsonObject\": null,\r\n    \"path\": \"/home\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{notification_url}}{{notification_message_url}}",
-									"host": [
-										"{{notification_url}}{{notification_message_url}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Patch",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"uuid\": {{messageNotificationUUID}},\r\n    \"received\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{notification_url}}{{notification_message_url}}/patch",
-									"host": [
-										"{{notification_url}}{{notification_message_url}}"
-									],
-									"path": [
-										"patch"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{notification_url}}{{notification_message_url}}/{{messageNotificationUUID}}?delete=SOFT",
-									"host": [
-										"{{notification_url}}{{notification_message_url}}"
-									],
-									"path": [
-										"{{messageNotificationUUID}}"
-									],
-									"query": [
-										{
-											"key": "delete",
-											"value": "SOFT"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Post",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.collectionVariables.set(\"messageNotificationUUID\", pm.response.json().uuid);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"fromUser\":\"test\",\r\n    \"toUser\":\"test163\",\r\n    \"sendType\":\"TO_USER\",\r\n    \"messageType\":\"INFO\",\r\n    \"project\":\"QR\",\r\n    \"message\":\"Test message\",\r\n    \"path\":\"/home\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{notification_url}}{{notification_message_url}}",
-									"host": [
-										"{{notification_url}}{{notification_message_url}}"
 									]
 								}
 							},
