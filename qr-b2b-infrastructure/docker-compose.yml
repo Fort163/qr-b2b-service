@@ -1,6 +1,7 @@
 version: "3.9"
 
 services:
+
   redis:
     image: redis:latest
     environment:
@@ -11,6 +12,22 @@ services:
       - "6385:6379"
     networks:
       - search-network
+      - qr-b2b-infrastructure-network
+
+  postgres:
+    image: "postgres:17.4"
+    volumes:
+      - ../db/data:/var/lib/postgresql/data/
+      - ./script:/docker-entrypoint-initdb.d/:rw
+      - ./conf/postgresql.conf:/etc/postgresql.conf
+      - ../db/logs:/logs
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5485:5432"
+    command: -c config_file=/etc/postgresql.conf
+    networks:
       - qr-b2b-infrastructure-network
 
 networks:

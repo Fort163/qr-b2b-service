@@ -17,6 +17,8 @@
         <java.version>17</java.version>
         <postgres.version>42.2.19</postgres.version>
         <qr.gateway.version>0.0.1-SNAPSHOT</qr.gateway.version>
+        <docker.plugin.version>1.4.13</docker.plugin.version>
+        <docker.hub.location>fort163</docker.hub.location>
     </properties>
     <dependencies>
         <dependency>
@@ -45,6 +47,30 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${docker.plugin.version}</version>
+                <configuration>
+                    <repository>${docker.hub.location}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>
+                            target/${project.build.finalName}.jar
+                        </JAR_FILE>
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>dockerDeploy</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
