@@ -1,4 +1,4 @@
-package com.quick.recording.qrb2bservice.service;
+package com.quick.recording.qrb2bservice.service.local;
 
 import com.quick.recording.gateway.config.MessageUtil;
 import com.quick.recording.gateway.config.error.exeption.NotFoundException;
@@ -7,6 +7,7 @@ import com.quick.recording.qrb2bservice.repository.SessionStoreRepository;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -21,8 +22,8 @@ public class SessionStoreServiceImpl implements SessionStoreService {
     @Override
     @CircuitBreaker(name = "database")
     public String getByUuid(UUID uuid) {
-        return sessionStoreRepository.findById(uuid).orElseThrow(
-                () -> new NotFoundException(messageUtil, SessionStoreEntity.class, uuid)
+        return sessionStoreRepository.findById(uuid).orElse(
+                new SessionStoreEntity()
         ).getStore();
     }
 
@@ -43,5 +44,16 @@ public class SessionStoreServiceImpl implements SessionStoreService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    @CircuitBreaker(name = "database")
+    public boolean delete(UUID uuid) {
+        Assert.notNull(uuid, "Uuid cannot be null");
+        SessionStoreEntity byId = sessionStoreRepository.findById(uuid).orElseThrow(() -> {
+            return new NotFoundException(messageUtil, SessionStoreEntity.class, uuid);
+        });
+        sessionStoreRepository.delete(byId);
+        return false;
     }
 }
